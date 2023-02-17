@@ -58,7 +58,6 @@ def updateItem(request):
     customer = request.user.customer
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False) # To study
-
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
     
@@ -73,6 +72,10 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False) # what is 'safe'?
+
+def processOrder(request):
+    print('Data:', request.body)
+    return JsonResponse('Payment complete!', safe=False)
 
     
 
